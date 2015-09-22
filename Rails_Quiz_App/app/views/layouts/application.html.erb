@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rails Quiz App</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<header class="navbar navbar-fixed-top navbar-inverse">
+      	<div class="container">	        
+	        <nav>
+              <ul class="nav navbar-nav navbar-right">
+              <% if session[:session_username_abc123] %>            
+                <li><a style="color: red;">Hi ! <%= session[:session_username_abc123] %></a></li>
+                <li><a href="/logout">Logout</a></li>
+              <% else %>
+                <li><a style="color: #fff;"> &gt;&gt; You not login &lt;&lt;</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/register">Register</a></li>
+              <% end %>
+
+              </ul>
+	          	<ul class="nav navbar-nav navbar-left">
+	            	<li><a href="/home">Home</a></li>
+	            	<li><a href="/about">About</a></li>
+	            	<li><a href="/contact">Contact</a></li>
+	            	<li><a href="/help">Help</a></li>                
+	          	</ul>
+	        </nav>
+      	</div>
+    </header>
+    <div class="clearfix"></div>
+    <br/><br/><br/>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+</body>
+</html>
