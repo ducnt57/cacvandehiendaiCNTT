@@ -1,0 +1,62 @@
+<% provide(:title, "Quiz App | Add Quizzes") %>
+<div class="row">
+	<ul class="nav nav-pills nav-stacked" id="subject">
+  		<li class="active"><a>Add Quizzes</a></li>
+  	</ul>	
+  	<br/>
+  	<div class="col-lg-12">
+		<%= form_tag "/quizzes/create" , :class => 'form-default' do %>
+			<div id="notice" class="text-danger"><b><%= notice %></b></div><br/>
+			<div class="form-group">			    
+			    <%= label_tag :quiz_content %>			    
+			    <%= text_field_tag :quiz_content, params[:quiz_content] , :class => 'form-control'%>
+			</div>
+			<div class="form-group">
+				<%= label_tag :choice %>
+				<table class="table table-striped">
+					<tr>
+						<td>A.</td>
+						<td><%= text_field_tag :choice_content_A, params[:choice_content_A] , :class => 'form-control'%></td>
+					</tr>
+					<tr>
+						<td>B.</td>
+						<td><%= text_field_tag :choice_content_B, params[:choice_content_B] , :class => 'form-control'%></td>
+					</tr>
+					<tr>
+						<td>C.</td>
+						<td><%= text_field_tag :choice_content_C, params[:choice_content_C] , :class => 'form-control'%></td>
+					</tr>
+					<tr>
+						<td>D.</td>
+						<td><%= text_field_tag :choice_content_D, params[:choice_content_D] , :class => 'form-control'%></td>
+					</tr>
+				</table>
+			</div>
+			<div class="form-group">
+		    	<%= label_tag :is_correct %><br/>
+		    	A.<input  id="is_correct" name="is_correct" type="radio" value="A" />
+		    	B.<input  id="is_correct" name="is_correct" type="radio" value="B" />
+		    	C.<input  id="is_correct" name="is_correct" type="radio" value="C" />
+		    	D.<input  id="is_correct" name="is_correct" type="radio" value="D" />		    	
+		  	</div>
+		  	<div class="form-group">
+			    <%= label_tag :slug %>
+			    <%= text_field_tag :quiz_slug, params[:quiz_slug] , :class => 'form-control'%>			    
+			</div>
+			<div class="form-group">
+			   	<%= label_tag :subject %>
+			    <select name="category" class="form-control">
+			    	<%
+			    		@cate= Categories.all
+			    		@cate.each do |cc|
+			    	%>
+			    		<option value="<%= cc.cate_id %>"><%= cc.name%></option>
+			    	<% end %>
+			    </select>
+			</div>
+			<div class="form-group">
+				 <%= submit_tag "Add quizzes" , :class => 'btn btn-danger' %>
+			</div>
+		<% end %>
+	</div>
+</div>

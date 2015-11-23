@@ -1,0 +1,45 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.logo{
+	font-size: 22px;
+}
+#nav-top{
+	background: #B0E0E6;
+}
+#navLeft ul{
+	 display: none;
+	 position: absolute;
+	 background: #EEE8AA;
+	 width: 120%;
+   z-index: 999999;
+}
+#navLeft li:hover ul{
+	display: block;
+}
+#navLeft ul li{
+	
+}
+#navLeft ul li a{
+	
+}
+#subject li:first-child{
+	border: 0;
+}
+#subject li {
+	border: 1px solid #79CDCD;
+}
+#pagebody{
+	margin-bottom: 20px;
+}
+/* pright */
+#pright{
+  border: 1px solid #79CDCD; 
+  padding-bottom: 20px;
+}
+.footer{ 
+  background-color: #f5f5f5; 
+}

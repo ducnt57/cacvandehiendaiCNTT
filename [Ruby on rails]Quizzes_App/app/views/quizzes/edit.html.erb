@@ -1,0 +1,62 @@
+<% provide(:title, "Quiz App | Edit Quizzes") %>
+<div class="row">
+	<ul class="nav nav-pills nav-stacked" id="subject">
+  		<li class="active"><a>Edit Quizzes: <%= @quiz_id %> </a></li>
+  	</ul>
+  	<div class="clearfix"></div>
+	<br/>	
+  	<div class="col-lg-12">
+  		<%= form_tag "/quizzes/update" , :class => 'form-default' do %>
+			
+			<div id="notice" class="text-danger"><b><%= notice %></b></div><br/>	
+			<div class="form-group">			    
+			    <%= label_tag :quiz_id %>			    
+			    <%= text_field_tag :quiz_id, @data_quiz.quiz_id , :class => 'form-control', disabled: true %>
+			</div>
+			<div class="form-group">			    
+			    <%= label_tag :quiz_content %>			    
+			    <%= text_field_tag :quiz_content, @data_quiz.quiz_content , :class => 'form-control'%>
+			</div>
+			<input type="hidden" name="quiz_id" value="<%= @quiz_id %>"/>
+			<div class="form-group">
+				<%= label_tag :choice %>
+				<table class="table table-striped">
+					<% @data_choice.each do |ch| %>
+					<tr>
+						<td><%= ch.choice_title %>.</td>
+						<td><input class="form-control" id="choice_content_<%= ch.choice_title %>" name="choice_content_<%= ch.choice_title %>" type="text" value="<%= ch.choice_content %>" /></td>
+						<input type="hidden" name="choice_id_<%= ch.choice_title %>" value="<%= ch.choice_id %>"/>
+					</tr>
+					
+					<% end %>
+				</table>
+			</div>
+			<div class="form-group">
+		    	<%= label_tag :is_correct %><br/>
+		    	A.<input  id="is_correct" name="is_correct" type="radio" value="A" <% if @data_quiz.is_correct=="A" %> checked <% else %> "" <% end %> />
+		    	B.<input  id="is_correct" name="is_correct" type="radio" value="B" <% if @data_quiz.is_correct=="B" %> checked <% else %> "" <% end %>/>
+		    	C.<input  id="is_correct" name="is_correct" type="radio" value="C" <% if @data_quiz.is_correct=="C" %> checked <% else %> "" <% end %>/>
+		    	D.<input  id="is_correct" name="is_correct" type="radio" value="D" <% if @data_quiz.is_correct=="D" %> checked <% else %> "" <% end %>/>		    	
+		  	</div>
+		  	<div class="form-group">
+			    <%= label_tag :slug %>
+			    <%= text_field_tag :quiz_slug, @data_quiz.quiz_slug , :class => 'form-control'%>			    
+			</div>
+			<div class="form-group">
+			   	<%= label_tag :subject %>
+			    <select name="category" class="form-control">
+			    	<%
+			    		@cate= Categories.all
+			    		@cate.each do |cc|
+			    	%>
+			    		<option value="<%= cc.cate_id %>"  <% if @data_quiz.cate_id==cc.cate_id %> selected <% else %> "" <% end %>  ><%= cc.name%></option>
+			    	<% end %>
+			    </select>
+			</div>
+			<div class="form-group">
+				 <%= submit_tag "Edit quizzes" , :class => 'btn btn-success' %>
+			</div>
+		<% end %>
+  	</div>
+
+</div>

@@ -1,0 +1,28 @@
+<% provide(:title, "Quiz App | Add Category") %>
+<div class="row">
+	<ul class="nav nav-pills nav-stacked" id="subject">
+  		<li class="active"><a>Add Category</a></li>
+  	</ul>
+  	<div class="clearfix"></div>
+	<br/>	
+  	<div class="col-lg-12">
+  		<%= form_tag "/category/create" , :class => 'form-default' do %>
+			<div id="notice" class="text-danger"><b><%= notice %></b></div><br/>
+			<div class="form-group">			    
+			    <%= label_tag :name %>			    
+			    <%= text_field_tag :name, params[:name], :class => 'form-control' %>
+			</div>
+			<div class="form-group">			    
+			    <%= label_tag :slug %>			    
+			    <%= text_field_tag :slug, params[:slug], :class => 'form-control' %>
+			</div>
+			<div class="form-group">			    
+			    <%= label_tag :icon %>			    
+			    <%= text_field_tag :icon, params[:icon], :class => 'form-control' %>
+			</div>
+			<div>
+				<%= submit_tag "Add category" , :class => 'btn btn-danger' %>
+			</div>
+		<% end %>
+	</div>
+</div>

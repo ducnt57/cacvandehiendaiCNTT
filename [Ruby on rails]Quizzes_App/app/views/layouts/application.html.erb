@@ -1,0 +1,109 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title><%= yield(:title) %></title>
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+</head>
+<body>
+	<header class="navbar navbar-pills" id="nav-top">
+      	<div class="container-fuil">      		
+      		<nav>
+      			<ul class="nav navbar-nav navbar-left">
+      				<li><a>&nbsp;</a></li>
+      				<li><a href="/home" class="logo">Quiz App</a></li>
+      			</ul>
+          		<ul class="nav navbar-nav navbar-right" id="navLeft">
+            		<li><a href="/home">Home</a></li>
+            		<li><a href="/contact">Contact</a></li>
+            		<% if session[:username_abc123] %>
+            			<li>
+            				<a style="color: red;">Hi ! <%= session[:username_abc123] %> <span class="caret"></span></a>
+            				<ul class="nav nav-pills nav-stacked">
+            					<li><a href="/profile"><span class="glyphicon glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a></li>
+            					<%
+                        @user = User.find(session[:user_id_abc123])
+                        if @user.level == '0'
+                      %>
+                        <li><a href="/admin/home"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Manager</a></li>
+                      <%
+                        end
+                      %>
+                      <li><a href="/logout"><span class="glyphicon glyphicon glyphicon-off" aria-hidden="true"></span> Logout</a></li>            					
+            				</ul>
+            			</li>
+            			<li><a>&nbsp;</a></li>
+            		<% else %>
+
+            			<li><a href="/login">Login</a></li>
+            			<li><a href="/register">Sign up</a></li>
+            			<li><a>&nbsp;</a></li>
+            		<% end %>
+          		</ul>
+          	</nav>        
+      	</div>
+    </header>
+    <div class="clearfix"></div>
+    <div class="container" id="pagebody">
+      <div class="row">
+      	<div class="col-lg-3" id="pleft">
+      		<ul class="nav nav-pills nav-stacked" id="subject">
+      			<li class="active"><a>Subject</a></li>
+            <%
+              @cate = Categories.all
+              @cate.each do |f| 
+                @count_quizzes= Quizzes.where(cate_id: f.cate_id).count
+            %>
+              <li><a href="/subject/<%= f.cate_id %>/<%= f.slug %>"><%= f.name %> (<%= @count_quizzes %>)</a></li>
+            <%
+              end
+            %>            
+			    </ul>
+          <br/>
+          <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a>Leaderboard</a></li>
+            <li style="border: 1px solid #79CDCD; padding: 5px;">
+              <ul class="nav nav-stacked">
+                <li>
+                  <div class="pull-left"></div>
+                  <div class="pull-right">SCORE</div>
+                  <div class="clearfix"></div>
+                </li>
+                <%
+                  @user_top= User.order("score DESC").limit(10)
+                  i=0;
+                  @user_top.each do |t|
+                    i=i+1;
+                %>
+                <li>
+                  <div class="pull-left"><%= i %>. <%= t.username %></div>
+                  <% if t.score==nil %>
+                    <div class="pull-right">0</div>
+                  <% else %>
+                    <div class="pull-right"><%= t.score %></div>
+                  <% end %>
+                </li>
+                <hr/>
+                <div class="clearfix"></div>
+
+                <% end %>
+              </ul> 
+            </li>
+          </ul>
+      	</div>
+      	<div class="col-lg-9" id="pright">      		
+      		<%= yield %>
+      	</div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <footer class="footer" style="padding: 9px;">
+      <div class="container">
+        <p class="text-muted">Copyrights © 2015 Quiz App. All Rights Reserved. Designed by QuizApp.com</p>
+      </div>
+    </footer>
+    
+</body>
+</html>

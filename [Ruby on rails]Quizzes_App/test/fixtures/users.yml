@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  password_hash: MyString
+  password_salt: MyString
+  email: MyString
+  fullname: MyString
+  avatar: MyString
+  level: MyString
+  score: 1
+
+two:
+  username: MyString
+  password_hash: MyString
+  password_salt: MyString
+  email: MyString
+  fullname: MyString
+  avatar: MyString
+  level: MyString
+  score: 1

@@ -1,0 +1,30 @@
+<% provide(:title, "Quiz App | Check answer ") %>
+<div class="row">
+  	<ul class="nav nav-pills nav-stacked" id="subject">
+		<li class="active"><a>Check answer</a></li>
+	</ul>
+	<div class="col-lg-12"> 
+		<br/>
+		<% if @thongbao %>
+			<div id="notice" class="text-danger"><b><%= @thongbao %></b></div><br/>
+		<% end %>
+		<% if @errors %>
+			<ul>
+			<% @errors.each do |key, value| %>
+				<li><%= value %></li>
+			<% end %>
+			</ul>
+		<% end %>
+
+		<% if @kq %>
+			<div id="notice" class="text-danger"><b>RESULT</b></div><br/>
+			<ul>				
+				<% @kq.each do |key, value| %>
+					<li><%= key %>: <%= value %></li>
+				<% end %>				
+			</ul>
+			<p><span class="text-success">Score:</span> <span class="label label-danger" style="padding: 5px; font-size: 16px;"><%= @tongdiem %></span></p>
+			<p><a href="/home">Continue -> </a></p>
+		<% end %>
+	</div>
+</div>  
